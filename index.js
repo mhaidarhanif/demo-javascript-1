@@ -19,4 +19,5 @@ const correctAnswer =
 
 const isCorrect = correctAnswer === ourAnswer;
 
+console.log("Our answer:", ourAnswer);
 console.log("Is correct?", isCorrect);
