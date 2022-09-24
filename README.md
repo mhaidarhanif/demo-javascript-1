@@ -1,5 +1,5 @@
 # Demo JavaScript
 
-Create a simple demo of a JavaScript program.
+Create a simple JavaScript programs.
 
 Live: https://mhaidarhanif-demo-javascript.vercel.app
