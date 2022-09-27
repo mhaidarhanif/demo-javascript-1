@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Haidar",
+    "age": 20,
+    "isAdmin": true,
+    "courses": ["html", "css", "js"]
+  },
+  {
+    "name": "Hanif",
+    "age": 20,
+    "isAdmin": true,
+    "courses": ["html", "css", "js"]
+  }
+]
