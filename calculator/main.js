@@ -4,20 +4,36 @@ import {
 } from "./modules/square.js";
 import calculateCircleArea from "./modules/circle.js";
 
-// Square
-const sideLength = 5;
-const resultSquareArea = calculateSquareArea(sideLength);
-const resultSquarePerimeter = calculateSquarePerimeter(sideLength);
+const squareAreaFormElement = document.getElementById("square-area-form");
+const squareSideLengthInputElement =
+  document.getElementById("square-side-length");
+const squareAreaResultElement = document.getElementById("square-area-result");
+const errorMessageElement = document.getElementById("error-message");
 
-// Circle
-const radius = 12;
-const resultCircleArea = calculateCircleArea(radius);
+squareAreaFormElement.addEventListener("submit", (event) => {
+  try {
+    event.preventDefault();
 
-console.group("Square");
-console.log("resultSquareArea", resultSquareArea);
-console.log("resultSquarePerimeter", resultSquarePerimeter);
-console.groupEnd();
+    const sideLength = squareSideLengthInputElement.valueAsNumber;
 
-console.group("Circle");
-console.log("resultCircleArea", resultCircleArea);
-console.groupEnd();
+    if (sideLength <= 0) {
+      throw new Error("Side length must be over 0");
+    }
+    if (!sideLength) {
+      throw new Error("Side length must exist");
+    }
+
+    const resultSquareArea = calculateSquareArea(sideLength);
+
+    if (!resultSquareArea) {
+      throw new Error("Result is undefined");
+    }
+
+    errorMessageElement.innerText = "";
+    squareAreaResultElement.innerText = `${resultSquareArea} cm²`;
+  } catch (error) {
+    console.error(error);
+    errorMessageElement.innerText = error.message;
+    squareAreaResultElement.innerText = "";
+  }
+});

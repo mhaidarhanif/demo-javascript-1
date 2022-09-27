@@ -9,6 +9,22 @@
   <body>
     <h1>Calculator</h1>
 
+    <h2>Square Area</h2>
+
+    <form id="square-area-form">
+      <label for="square-side-length">Side Length (cm)</label>
+      <input
+        type="number"
+        step="any"
+        name="square-side-length"
+        id="square-side-length"
+      />
+      <input type="submit" value="Calculate" />
+    </form>
+
+    <p id="square-area-result"></p>
+    <p id="error-message"></p>
+
     <script type="module" src="./main.js"></script>
   </body>
 </html>

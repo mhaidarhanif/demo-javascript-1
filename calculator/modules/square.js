@@ -1,7 +1,9 @@
 export function calculateSquareArea(sideLength) {
-  return sideLength ** 2;
+  const squareArea = sideLength ** 2;
+  return squareArea.toFixed(2);
 }
 
 export function calculateSquarePerimeter(sideLength) {
-  return sideLength * 4;
+  const squarePerimeter = sideLength * 4;
+  return squarePerimeter.toFixed(2);
 }
