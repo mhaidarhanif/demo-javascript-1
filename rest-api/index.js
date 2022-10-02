@@ -1,6 +1,9 @@
 const questionsElement = document.getElementById("questions");
 const questionFormElement = document.getElementById("question-form");
 
+const BACKEND_API_URL =
+  "https://api.kontenbase.com/query/api/v1/29f479eb-b571-4de1-978b-10ac1755d57c";
+
 const renderQuestions = (questions) => {
   console.log({ questions });
 
@@ -16,9 +19,7 @@ const renderQuestions = (questions) => {
 };
 
 const fetchQuestions = async () => {
-  const response = await fetch(
-    "https://api.kontenbase.com/query/api/v1/29f479eb-b571-4de1-978b-10ac1755d57c/questions"
-  );
+  const response = await fetch(`${BACKEND_API_URL}/questions`);
   const questions = await response.json();
 
   renderQuestions(questions);
@@ -34,25 +35,19 @@ const addNewQuestion = async (event) => {
     description: formData.get("question-description"),
   };
 
-  const response = await fetch(
-    "https://api.kontenbase.com/query/api/v1/29f479eb-b571-4de1-978b-10ac1755d57c/questions",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newQuestion),
-    }
-  );
+  const response = await fetch(`${BACKEND_API_URL}/questions`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newQuestion),
+  });
 
   fetchQuestions();
 };
 
 const deleteQuestionById = async (questionId) => {
-  const response = await fetch(
-    `https://api.kontenbase.com/query/api/v1/29f479eb-b571-4de1-978b-10ac1755d57c/questions/${questionId}`,
-    {
-      method: "DELETE",
-    }
-  );
+  const response = await fetch(`${BACKEND_API_URL}/questions/${questionId}`, {
+    method: "DELETE",
+  });
 
   fetchQuestions();
 };
