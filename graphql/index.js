@@ -47,22 +47,46 @@ const fetchQuestions = async () => {
 };
 
 const addNewQuestion = async (event) => {
-  event.preventDefault();
+  try {
+    event.preventDefault();
 
-  const formData = new FormData(event.target);
+    const formData = new FormData(event.target);
 
-  const newQuestion = {
-    title: formData.get("question-title"),
-    description: formData.get("question-description"),
-  };
+    const newQuestion = {
+      title: formData.get("question-title"),
+      description: formData.get("question-description"),
+    };
 
-  const response = await fetch(BACKEND_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newQuestion),
-  });
+    const mutateAddNewQuestion = `mutation AddNewQuestion {
+    insert_questions_one(object: {
+      title: "${newQuestion.title}",
+      description: "${newQuestion.description}"
+    }) {
+      id
+      title
+      description
+    }
+  }`;
 
-  fetchQuestions();
+    const response = await fetch(BACKEND_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-hasura-admin-secret": "17ac133e8eb4e9d041b6c75dd819ba7e",
+      },
+      body: JSON.stringify({ query: mutateAddNewQuestion }),
+    });
+
+    const { data, errors } = await response.json();
+
+    if (errors?.length && errors[0]?.message) {
+      throw new Error("Failed to add new question");
+    }
+
+    fetchQuestions();
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 
 const deleteQuestionById = async (questionId) => {
