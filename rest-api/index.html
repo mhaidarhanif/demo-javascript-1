@@ -9,6 +9,23 @@
   <body>
     <h1>REST API</h1>
 
+    <form id="question-form">
+      <input
+        type="text"
+        name="question-title"
+        id="question-title"
+        placeholder="What do you want to ask?"
+      />
+      <textarea
+        name="question-description"
+        id="question-description"
+        cols="30"
+        rows="10"
+        placeholder="Put some details for the question"
+      ></textarea>
+      <input type="submit" value="Ask Question" />
+    </form>
+
     <div id="questions">
       <!-- Questions -->
     </div>
